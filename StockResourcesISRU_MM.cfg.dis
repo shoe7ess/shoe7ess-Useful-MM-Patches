@@ -1,0 +1,232 @@
+@PART[*]:HAS[@MODULE[InterstellarRefineryController]]:AFTER[WarpPlugin]:FINAL
+{
+	MODULE[InterstellarRefineryController]
+	{
+		RESOURCE
+			{
+				name = Ore
+				amount = 0
+				maxAmount = 10
+			}
+	}
+	MODULE[ModuleResourceConverter]
+	{
+		ConverterName = Lf+Ox
+		StartActionName = Start ISRU [Lf+Ox]
+		StopActionName = Stop ISRU [Lf+Ox]	 
+		AutoShutdown = true
+		TemperatureModifier
+		{
+			key = 0 100000
+			key = 750 50000
+			key = 1000 10000
+			key = 1250 500	
+			key = 2000 50	
+			key = 4000 0
+		}				
+		GeneratesHeat = true
+		DefaultShutoffTemp = .8
+		ThermalEfficiency 
+		{
+			key = 0 0 0 0
+			key = 500 0.1 0 0
+			key = 1000 1.0 0 0
+			key = 1250 0.1 0 0
+			key = 3000 0 0 0 
+		}
+
+
+		UseSpecialistBonus = true
+		SpecialistEfficiencyFactor = 0.2
+		SpecialistBonusBase = 0.05
+		ExperienceEffect = ConverterSkill
+		EfficiencyBonus = 1
+
+		 
+		INPUT_RESOURCE
+		{
+			ResourceName = Ore
+			Ratio = 0.5
+			FlowMode = STAGE_PRIORITY_FLOW
+  		}
+		INPUT_RESOURCE
+		{
+			ResourceName = ElectricCharge
+			Ratio = 30
+		}
+		OUTPUT_RESOURCE
+		{
+			ResourceName = LiquidFuel
+			Ratio = 0.45
+			DumpExcess = false
+			FlowMode = STAGE_PRIORITY_FLOW
+		}
+		OUTPUT_RESOURCE
+		{
+			ResourceName = Oxidizer
+			Ratio = 0.55
+			DumpExcess = false
+			FlowMode = STAGE_PRIORITY_FLOW
+		}
+	}
+
+	MODULE[ModuleResourceConverter]
+	{
+		+ConverterName = Monoprop
+		StartActionName = Start ISRU [Monoprop]
+		StopActionName = Stop ISRU [Monoprop]
+		AutoShutdown = true
+		TemperatureModifier
+		{
+			key = 0 100000
+			key = 750 50000
+			key = 1000 10000
+			key = 1250 500	
+			key = 2000 50	
+			key = 4000 0
+		}				
+		GeneratesHeat = true
+		DefaultShutoffTemp = .8
+		ThermalEfficiency 
+		{
+			key = 0 0 0 0
+			key = 500 0.1 0 0
+			key = 1000 1.0 0 0
+			key = 1250 0.1 0 0
+			key = 3000 0 0 0 
+		}
+
+		UseSpecialistBonus = true
+		SpecialistEfficiencyFactor = 0.2
+		SpecialistBonusBase = 0.05
+		ExperienceEffect = ConverterSkill
+		EfficiencyBonus = 1
+
+		 
+		INPUT_RESOURCE
+		{
+			ResourceName = Ore
+			Ratio = 0.5
+		}
+		INPUT_RESOURCE
+		{
+			ResourceName = ElectricCharge
+			Ratio = 30
+		}
+		OUTPUT_RESOURCE
+		{
+			ResourceName = MonoPropellant
+			Ratio = 1
+			DumpExcess = false
+		}
+	}
+
+
+	MODULE[ModuleResourceConverter]
+	{
+		+ConverterName = LiquidFuel
+		StartActionName = Start ISRU [LqdFuel]
+		StopActionName = Stop ISRU [LqdFuel]
+		AutoShutdown = true
+		TemperatureModifier
+		{
+			key = 0 100000
+			key = 750 50000
+			key = 1000 10000
+			key = 1250 500	
+			key = 2000 50	
+			key = 4000 0
+		}				
+		GeneratesHeat = true
+		DefaultShutoffTemp = .8
+		ThermalEfficiency 
+		{
+			key = 0 0 0 0
+			key = 500 0.1 0 0
+			key = 1000 1.0 0 0
+			key = 1250 0.1 0 0
+			key = 3000 0 0 0 
+		}
+		
+		UseSpecialistBonus = true
+		SpecialistEfficiencyFactor = 0.2
+		SpecialistBonusBase = 0.05
+		ExperienceEffect = ConverterSkill
+		EfficiencyBonus = 1
+
+		 
+		INPUT_RESOURCE
+		{
+			ResourceName = Ore
+			Ratio = 0.45
+			FlowMode = STAGE_PRIORITY_FLOW
+  		}
+		INPUT_RESOURCE
+		{
+			ResourceName = ElectricCharge
+			Ratio = 30
+		}
+		OUTPUT_RESOURCE
+		{
+			ResourceName = LiquidFuel
+			Ratio = 0.9
+			DumpExcess = false
+			FlowMode = STAGE_PRIORITY_FLOW
+		}
+	}
+
+	
+	MODULE[ModuleResourceConverter]
+	{
+		+ConverterName = Oxidizer
+		StartActionName = Start ISRU [Ox]
+		StopActionName = Stop ISRU [Ox]
+		AutoShutdown = true
+		TemperatureModifier
+		{
+			key = 0 100000
+			key = 750 50000
+			key = 1000 10000
+			key = 1250 500	
+			key = 2000 50	
+			key = 4000 0
+		}				
+		GeneratesHeat = true
+		DefaultShutoffTemp = .8
+		ThermalEfficiency 
+		{
+			key = 0 0 0 0
+			key = 500 0.1 0 0
+			key = 1000 1.0 0 0
+			key = 1250 0.1 0 0
+			key = 3000 0 0 0 
+		}
+
+		UseSpecialistBonus = true
+		SpecialistEfficiencyFactor = 0.2
+		SpecialistBonusBase = 0.05
+		ExperienceEffect = ConverterSkill
+
+		EfficiencyBonus = 1
+
+		 
+		INPUT_RESOURCE
+		{
+			ResourceName = Ore
+			Ratio = 0.55
+			FlowMode = STAGE_PRIORITY_FLOW
+  		}
+		INPUT_RESOURCE
+		{
+			ResourceName = ElectricCharge
+			Ratio = 30
+		}
+		OUTPUT_RESOURCE
+		{
+			ResourceName = Oxidizer
+			Ratio = 1.1
+			DumpExcess = false
+			FlowMode = STAGE_PRIORITY_FLOW
+		}
+	}
+}

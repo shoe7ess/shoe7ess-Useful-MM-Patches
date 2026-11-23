@@ -1,0 +1,86 @@
+@PART[proceduralProbeCore]:NEEDS[RemoteTech]
+{
+    @description = A procedurally scalable probe core. Features a built-in RemoteTech Flight Computer (SPU) and an integrated Omni/Relay transceiver system that scales in performance via career technology choices.
+
+    // 1. Strip all stock transceiver modules completely
+    !MODULE[ModuleDataTransmitter] {}
+    !MODULE[ModuleProceduralDataTransmitter] {}
+
+    // 2. Inject RemoteTech Signal Processing Unit (Flight Computer)
+    MODULE
+    {
+        name = ModuleSPU
+        IsRTCommandStation = False
+    }
+
+    // 3. Inject Base Class 1 RemoteTech Omni Antenna Module
+    MODULE
+    {
+        name = ModuleRTAntenna
+        TechRequired = start
+        Mode0OmniRange = 50000              // Range when deactivated (0 km)
+        Mode1OmniRange = 500000         // Class 1 Range: 500 km (longAntenna range)
+        EnergyCost = 0.02               // Power draw to keep transceiver active
+        
+        DeployFxModules = 0
+        TRANSMITTER
+        {
+            PacketInterval = 0.3
+            PacketSize = 2
+            PacketResourceCost = 15.0   // Baseline calculation multiplier
+        }
+    }
+}
+
+// Class 2 Upgrade (Flight Control)
+@PART[proceduralProbeCore]:HAS[@MODULE[ModuleSPU]]:NEEDS[RemoteTech]
+{
+    
+    @MODULE[ModuleRTAntenna]
+    {
+        @TechRequired = FlightControl
+        @Mode1OmniRange = 2000000       // Class 2: 2,000 km (2 Mm)
+        @EnergyCost = 0.05
+    }
+}
+
+// Class 3 Upgrade (Advanced Exploration)
+@PART[proceduralProbeCore]:HAS[@MODULE[ModuleSPU]]:NEEDS[RemoteTech]
+{
+
+    @MODULE[ModuleRTAntenna]
+    {
+        // Transceiver mutates into a long-range narrow Dish at Class 3
+        @TechRequired = AdvExploration
+        @Mode1OmniRange = 0             // Drop omni behaviors
+        %Mode1DishRange = 5000000000    // Class 3: 5,000,000 km (5 Gm Interplanetary Dish)
+        %DishAngle = 25.0               // Beam width targeting cone
+        @EnergyCost = 0.10
+    }
+}
+
+// Class 4 Upgrade (Large Unmanned Systems)
+@PART[proceduralProbeCore]:HAS[@MODULE[ModuleSPU]]:NEEDS[RemoteTech]
+{
+
+    @MODULE[ModuleRTAntenna]
+    {
+        @TechRequired = LargeUnmanned
+        @Mode1DishRange = 50000000000   // Class 4: 50,000,000 km (50 Gm Deep Space Dish)
+        @DishAngle = 10.0               // Narrower, highly focused tracking beam
+        @EnergyCost = 0.18
+    }
+}
+
+// Class 5 Upgrade (Automation)
+@PART[proceduralProbeCore]:HAS[@MODULE[ModuleSPU]]:NEEDS[RemoteTech]
+{
+
+    @MODULE[ModuleRTAntenna]
+    {
+        @TechRequired = Automation
+        @Mode1DishRange = 100000000000  // Class 5: 100,000,000 km (100 Gm Outer Planets Dish)
+        @DishAngle = 5.0                // Pinpoint solar-system-wide precision beam
+        @EnergyCost = 0.25
+    }
+}

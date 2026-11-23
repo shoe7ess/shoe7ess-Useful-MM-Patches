@@ -1,0 +1,33 @@
+// @TANK_DEFINITION[*]:FINAL:FOR[RealFuels]
+// {
+	// %numberOfMLILayers = 100
+	// @TANK
+	// {
+		// %loss_rate = 0
+		// %wallConduction = 0
+		// %insulationThickness = 1
+		// %insulationConduction = 0
+	// }
+// }
+// // Without MLI Redundancy (Haven't tested passthrough 1)
+// @PART[*]:HAS[TANK_DEFINITION[*]]:FINAL
+// {	
+	// %numberOfMLILayers = 100
+	// @TANK
+	// {
+		// %loss_rate = 0
+		// %wallConduction = 0
+		// %insulationThickness = 1
+		// %insulationConduction = 0
+	// }
+// }
+
+@RESOURCE_DEFINITION[*]:AFTER[RealFuels]
+{
+	%vsp = 0
+}
+
+@RESOURCE_DEFINITION[*]:NEEDS[RealFuels]:FINAL
+{
+	%vsp = 0
+}
